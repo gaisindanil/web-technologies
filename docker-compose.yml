@@ -1,0 +1,63 @@
+version: '3.4'
+
+services:
+  backend-nginx:
+    image: backend-nginx
+    build:
+      context: api/docker/development/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    ports:
+      - "801:80"
+    depends_on:
+      - backend-php-fpm
+
+  backend-php-fpm:
+    image: backend-php-fpm
+    build:
+      context: api/docker/development/php-fpm
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    depends_on:
+      - backend-postgres
+      - backend-redis
+
+  backend-php-cli:
+    image: backend-php-cli
+    build:
+      context: api/docker/development/php-cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    depends_on:
+      - backend-postgres
+      - backend-redis
+
+  backend-postgres:
+    image: postgres:13.3-alpine
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: elpod_prod
+      POSTGRES_PASSWORD: test_18b_test
+      POSTGRES_DB: elpod_prod
+    ports:
+      - "54321:5432"
+
+  backend-redis:
+    image: redis:5.0
+    volumes:
+      - redis:/data
+
+  backend-node:
+    image: node:19-alpine
+    volumes:
+      - ./api:/app
+    working_dir: /app
+
+volumes:
+  postgres-data:
+  redis:
+  portainer_data:

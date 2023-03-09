@@ -1,0 +1,77 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Вход в учетную запись{% endblock %}
+
+{% block body %}
+    <div class="auth-page">
+        <div class="container-fluid p-0">
+            <div class="row g-0 login-page">
+                <div class="col-xxl-3 col-lg-4 col-md-12">
+                    <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                        <div class="w-100">
+                            <div class="d-flex flex-column h-100">
+
+                                <div class="auth-content my-auto">
+                                    {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+                                    <div class="text-center">
+                                        <h5 class="mb-0">Вход в учетную запись</h5>
+                                    </div>
+                                    <form class="custom-form mt-4 pt-2" method="post" action="{{ path('app_login') }}">
+                                        <div class="mb-3">
+                                            <label class="form-label">Введите E-mail</label>
+                                            <input type="email" name="email" required class="form-control" id="username" placeholder="example@mail.ru">
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <label class="form-label">Введите пароль</label>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <div class="">
+                                                        <a href="{{ path('reset.password.request') }}" class="text-muted">Забыли пароль ?</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                            <div class="input-group auth-pass-inputgroup">
+                                                <input type="password" name="password" required="required" minlength="6" class="form-control" placeholder="Введите пароль" aria-label="Password" aria-describedby="password-addon">
+                                                <button class="btn btn-light ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="remember-check">
+                                                    <label class="form-check-label" for="remember-check">
+                                                        Оставаться в системе
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Войти</button>
+                                        </div>
+                                    </form>
+{#                                    <div class="mt-5 text-center">#}
+{#                                        <p class="text-muted mb-0">У вас нет аккаунта? <a href="{{ path('signUp') }}" class="text-primary fw-semibold"> Зарегестрироваться </a> </p>#}
+{#                                    </div>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end auth full page content -->
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container fluid -->
+    </div>
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('app_pass_addon_js') }}
+    {% endblock %}
+{% endblock %}

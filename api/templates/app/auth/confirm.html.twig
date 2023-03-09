@@ -1,0 +1,89 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Вход в учетную запись{% endblock %}
+
+{% block body %}
+<div class="auth-page">
+    <div class="container-fluid p-0">
+        <div class="row g-0 login-page">
+            <div class="col-xxl-3 col-lg-4 col-md-5">
+                <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                    <div class="w-100">
+                        <div class="d-flex flex-column h-100">
+
+                            <div class="auth-content my-auto">
+                                <div class="text-center">
+                                    <div class="p-2 mt-4">
+                                        <h4>Подтвердите Ваш электронный адрес</h4>
+                                        <p class="mb-5">Пожалуйста, введите 6-значный код, отправленный на E-mail</p>
+                                        {{ form_start(form) }}
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit1-input" class="visually-hidden">Dight 1</label>
+                                                        {{ form_widget(form.d1, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 2)'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit2-input" class="visually-hidden">Dight 2</label>
+                                                        {{ form_widget(form.d2, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 3)'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit3-input" class="visually-hidden">Dight 3</label>
+                                                        {{ form_widget(form.d3, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 4)'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit4-input" class="visually-hidden">Dight 4</label>
+                                                        {{ form_widget(form.d4, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 5)'}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit5-input" class="visually-hidden">Dight 5</label>
+                                                        {{ form_widget(form.d5, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 6)'}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="digit6-input" class="visually-hidden">Dight 6</label>
+                                                        {{ form_widget(form.d6, {'attr': {'placeholder': '', 'class':'form-control form-control-lg text-center', 'onkeyup':'moveToNext(this, 1)'}}) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{ form_end(form) }}
+
+                                        <div class="mt-4">
+                                            <a href="" class="btn btn-primary w-100">Подтвердить</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="mt-5 text-center">
+                                    <p class="text-muted mb-0">Не пришло письмо ? <a href="#" class="text-primary fw-semibold"> Отправить повторно </a> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end auth full page content -->
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container fluid -->
+</div>
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('app_email_confirm_js') }}
+    {% endblock %}
+{% endblock %}

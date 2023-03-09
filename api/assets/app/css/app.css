@@ -1,0 +1,9 @@
+@import "../../css/bootstrap.css";
+@import "../../css/icons.css";
+@import "../../css/app.css";
+
+
+.login-page {
+    display: flex;
+    justify-content: center;
+}

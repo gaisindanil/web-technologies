@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Оператор{% endblock %}
+
+{% block body %}
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Заявка</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Заявки</a></li>
+                        <li class="breadcrumb-item active">Заявка</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- end card header -->
+                    <div class="card-body">
+                        <!-- Tab panes -->
+                        <div class="tab-content p-3 text-muted">
+                            <div class="tab-pane active" id="home" role="tabpanel">
+                                <table class="table table-striped mb-0">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Наименование организации</th>
+                                        <td>{{ lead.personOrgTitle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">ИНН организации</th>
+                                        <td>{{ lead.personOrgInn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Пункт выдачи</th>
+                                        <td>{{ lead.locationLabel }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">ФИО руководителя организации</th>
+                                        <td>{{ lead.personFullName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>{{ lead.personEmail }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Номер ИНН руководителя организации</th>
+                                        <td>{{ lead.personInn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Контактный номер телефона</th>
+                                        <td>{{ lead.personPhoneNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Контактный номер телефона</th>
+                                        <td>{{ lead.personPhoneNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Паспортные данные</th>
+                                        <td>{{ lead.personSeries }} {{ lead.personNumber }}, Дата выдачи {{ lead.personDate }}, Код подразделения {{ lead.personCode }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Паспорт</th>
+                                        <td><a target="_blank" href="{{ storage_path(lead.personPassportFile) }}">{{ storage_path(lead.personPassportFile) }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">СНИЛС</th>
+                                        <td><a target="_blank" href="{{ storage_path(lead.personSnilsFile) }}">{{ storage_path(lead.personSnilsFile) }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">ИНН</th>
+                                        <td><a href="{{ storage_path(lead.personInnFile) }}">{{ storage_path(lead.personInnFile) }}</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div><!-- end card-body -->
+            </div>
+            <!-- end card -->
+            <!-- end tab content -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

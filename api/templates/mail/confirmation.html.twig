@@ -1,0 +1,12 @@
+{% extends 'mail.html.twig' %}
+
+{% block body %}
+    {% set url = url('sign_up_confirm', {'token': token}) %}
+    <p style="margin: 10px 0;">
+        Ваш адрес электронной почты был использован для регистрации нового пользователя в системе SignAll.
+        Для подтверждения запроса на регистрацию перейдите по
+        <b>
+            <a href="{{ url }}" target="_blank" rel=" noopener noreferrer">ссылке</a>
+        </b>
+    </p>
+{% endblock %}

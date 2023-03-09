@@ -1,0 +1,97 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+
+<!-- <body data-layout="horizontal"> -->
+<div class="auth-page">
+    <div class="container-fluid p-0">
+        <div class="row g-0 login-page">
+            <div class="col-xxl-3 col-lg-4 col-md-5">
+                <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                    <div class="w-100">
+                        <div class="d-flex flex-column h-100">
+
+                            <div class="auth-content my-auto">
+                                {% include '_flashes.html.twig' %}
+                                {% block form_errors %}
+                                    {% apply spaceless %}
+                                        {% if form.vars.errors|length > 0 %}
+                                            {% for error in form.vars.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ error.message }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endapply %}
+                                {% endblock form_errors %}
+                                <div class="text-center">
+                                    <h5 class="mb-0">Регистрация</h5>
+                                </div>
+                                {{ form_start(form, { 'attr': {'class': 'needs-validation custom-form mt-4 pt-2'} }) }}
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">Имя</label>
+                                    {{ form_widget(form.firstName, {'attr': {'placeholder': 'Имя', 'class':'form-control'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.firstName) }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Фамилия</label>
+                                    {{ form_widget(form.lastName, {'attr': {'placeholder': 'Фамилия', 'class':'form-control'}}) }}
+                                    {{ form_errors(form.lastName) }}
+                                    <div class="invalid-feedback">
+                                        Введите E-mail
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="middleName" class="form-label">Отчество</label>
+                                    {{ form_widget(form.middleName, {'attr': {'placeholder': 'Отчество', 'class':'form-control'}}) }}
+                                    {{ form_errors(form.middleName) }}
+                                    <div class="invalid-feedback">
+                                        Введите E-mail
+                                    </div>
+                                </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">E-mail</label>
+                                        {{ form_widget(form.email, {'attr': {'placeholder': 'E-mail', 'class':'form-control'}}) }}
+                                        <div class="invalid-feedback">
+                                            {{ form_errors(form.email) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Пароль</label>
+                                        {{ form_widget(form.password, {'attr': {'placeholder': 'Введите пароль', 'class':'form-control'}}) }}
+                                        <div class="invalid-feedback">
+                                            {{ form_errors(form.password) }}
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirmPassword" class="form-label">Повторите пароль</label>
+                                        {{ form_widget(form.confirmPassword, {'attr': {'placeholder': 'Введите повторно пароль', 'class':'form-control'}}) }}
+                                        <div class="invalid-feedback">
+                                            {{ form_errors(form.confirmPassword) }}
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Зарегестрироваться</button>
+                                    </div>
+                                {{ form_end(form) }}
+                                <div class="mt-5 text-center">
+                                    <p class="text-muted mb-0">У вас есть аккаунт ? <a href="{{ path('app_login') }}" class="text-primary fw-semibold"> Войти </a> </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end auth full page content -->
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container fluid -->
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+        envelope:
+            sender: 'info@signall.tech'
+        headers:
+            From: 'Signall <info@signall.tech>'
+            Bcc: 'info@signall.tech'

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Заявки{% endblock %}
+
+{% block body %}
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Заявки</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Панель управления</a></li>
+                        <li class="breadcrumb-item active">Заявки</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <table id="datatable" class="table table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Наименование организации</th>
+{#                            <th>Номер СНИЛС руководителя организации</th>#}
+                            <th>Пункт выдачи</th>
+                            <th>ИНН организации</th>
+                            <th>Контактный адрес электронной почты</th>
+                            <th>ФИО руководителя организации</th>
+{#                            <th>Номер ИНН руководителя организации</th>#}
+                            <th>Контактный номер телефона</th>
+                            <th>Дата и время</th>
+{#                            <th>Серия паспорта</th>#}
+{#                            <th>Номер паспорта</th>#}
+{#                            <th>Дата выдачи</th>#}
+{#                            <th>Код подразделения</th>#}
+{#                            <th>Скан паспорта руководителя организации</th>#}
+{#                            <th>Скан СНИЛС руководителя организации</th>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in leads %}
+                            <tr>
+                                <td>{{ item.id }}</td>
+                                <td><a href="{{ path('lead_show', {'guid' : item.guid}) }}">{{ item.person_ogr_title }}</a></td>
+{#                                <td>{{ item.person_series }}</td>#}
+                                <td>{{ item.location_label }}</td>
+                                <td>{{ item.person_org_inn }}</td>
+                                <td>{{ item.person_email }}</td>
+                                <td>{{ item.person_full_name }}</td>
+{#                                <td>{{ item.person_inn }}</td>#}
+                                <td>{{ item.person_phone_number }}</td>
+{#                                <td>{{ item.person_series }}</td>#}
+{#                                <td>{{ item.person_number }}</td>#}
+{#                                <td>{{ item.person_date }}</td>#}
+{#                                <td>{{ item.person_code }}</td>#}
+                                <td>{{ item.created_at }}</td>
+                                <td>
+{#                                    <a href="{{ path('auto_delete', {'public_id':item.public_id}) }}" class="btn btn-outline-secondary btn-sm delete" title="Удалить">#}
+{#                                        <i class="fas fa-trash-alt"></i>#}
+{#                                    </a>#}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        {{ knp_pagination_render(leads, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,55 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '13'
+        types:
+            public_id: 'App\Domain\Common\Types\IdType'
+            user_status: 'App\Domain\Auth\Entity\User\StatusType'
+            user_email: 'App\Domain\Auth\Entity\User\EmailType'
+            user_role: 'App\Domain\Auth\Entity\User\RoleType'
+            lead_status: 'App\Domain\Lead\Entity\Lead\StatusType'
+            file_status: 'App\Domain\Lead\Entity\File\StatusType'
+
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            User:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Domain/Auth/Entity/User'
+                prefix: 'App\Domain\Auth\Entity\User'
+                alias: User
+            Lead:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Domain/Lead/Entity/Lead'
+                prefix: 'App\Domain\Lead\Entity\Lead'
+                alias: Lead
+
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
